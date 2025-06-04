@@ -74,3 +74,20 @@ deletar agendamento <ID>  # (admins apenas)
 ## 📄 Licença
 
 Este projeto é open-source sob a licença MIT.
+
+---
+
+## 🔄 Lambda `ExecutaAgendamentosEC2`
+
+Este segundo Lambda deve ser configurado para rodar periodicamente (ex: a cada minuto) e é responsável por:
+
+- Buscar agendamentos `pendentes` cujo horário já passou
+- Iniciar ou parar as instâncias EC2
+- Atualizar o status dos agendamentos no DynamoDB (`executado` ou `erro`)
+
+### Deploy
+
+1. Crie uma nova função Lambda
+2. Use o código presente em `ExecutaAgendamentosEC2/lambda_function.py`
+3. Agende sua execução com o Amazon EventBridge (ex: `rate(1 minute)`)
+
