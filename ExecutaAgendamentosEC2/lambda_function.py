@@ -1,5 +1,6 @@
 import boto3
 import logging
+import os
 from datetime import datetime, timezone
 
 logger = logging.getLogger()
@@ -7,7 +8,7 @@ logger.setLevel(logging.INFO)
 
 dynamodb = boto3.resource('dynamodb')
 ec2 = boto3.client('ec2')
-tabela = dynamodb.Table('EC2Agendamentos')
+tabela = dynamodb.Table(os.environ['DYNAMODB_TABLE_NAME'])
 
 def lambda_handler(event, context):
     now_utc = datetime.now(timezone.utc).isoformat()
